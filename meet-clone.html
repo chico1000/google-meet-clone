@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Google Meet Clone</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      html {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Roboto", serif;
+        width: 100%;
+        /* overflow-x: hidden; */
+      }
+      .nav-bar {
+        position: fixed;
+        right: 0;
+        left: 0;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        /* background-color: red; */
+        /* padding: 20px; */
+        padding-top: 20px;
+        padding-right: 20px;
+        padding-bottom: 20px;
+        padding-left: 20px;
+        box-shadow: 0 0 3px 3px #c4c4c4;
+        background-color: white;
+        z-index: 1;
+      }
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 50px;
+      }
+      .nav-links__list,
+      .middle-nav-list {
+        list-style: none;
+        /* display: flex; */
+        /* gap: 50px; */
+        /* margin-left: 40px; */
+      }
+      .nav-links__list-item {
+        display: inline-block;
+        margin-right: 40px;
+        color: gray;
+        font-size: 18px;
+      }
+      .G {
+        color: blue;
+        font-size: 22px;
+      }
+      .o {
+        color: red;
+        font-size: 22px;
+        margin-left: -4px;
+      }
+      .o_ {
+        color: orange;
+        font-size: 22px;
+        margin-left: -4px;
+      }
+      .g {
+        color: blue;
+        font-size: 22px;
+        margin-left: -4px;
+      }
+      .l {
+        color: green;
+        font-size: 22px;
+        margin-left: -4px;
+      }
+      .e {
+        color: red;
+        font-size: 22px;
+        margin-left: -4px;
+      }
+      .w {
+        color: #5f6368;
+        font-size: 22px;
+      }
+      .header-btn-container {
+        margin-top: 20px;
+      }
+      .btn-register {
+        background-color: #1a73e8;
+        color: white;
+        height: 45px;
+        width: 100px;
+        border-radius: 5px;
+        border: none;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      .btn-register:hover {
+        background-color: blue;
+      }
+      .btn-reg {
+        background-color: #1a73e8;
+        color: white;
+        height: 45px;
+        width: 200px;
+        border-radius: 5px;
+        border: none;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      .btn-reg:hover {
+        background-color: blue;
+      }
+      .btn-test {
+        background-color: white;
+        color: #1a73e8;
+        height: 45px;
+        width: 200px;
+        font-weight: 600;
+        cursor: pointer;
+        border-radius: 5px;
+        border: 1px solid gray;
+      }
+      .btn-test:hover {
+        background-color: lightgray;
+        border-color: #1a73e8;
+      }
+      button {
+        margin-right: 20px;
+      }
+      #hero-section {
+        position: relative;
+        top: 100px;
+        /* z-index: 2; */
+      }
+      .hero-section {
+        width: 100%;
+        display: flex;
+        padding-left: 10%;
+        padding-right: 10%;
+        /* max-width: 100%; */
+        /* overflow-x: hidden; */
+        justify-content: space-between;
+      }
+      .hero-section__description {
+        width: 48%;
+      }
+      .hero-section__image {
+        width: 48%;
+      }
+      .hero-section-img {
+        /* max-width: 100%; */
+        width: 100%;
+        margin-top: 50px;
+      }
+      .hero-section__heading {
+        font-size: 56px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+      }
+      .section-header {
+        font-size: 40px;
+        font-weight: 500;
+        color: #202124;
+      }
+      .section-description {
+        color: gray;
+        font-size: 18px;
+        margin-top: 20px;
+      }
+      .google-meet {
+        color: gray;
+        font-size: 24px;
+        margin-top: 30px;
+      }
+      .join-meeting {
+        display: flex;
+        margin-top: 65px;
+        font-size: 18px;
+      }
+      .join-meeting__text {
+        margin-right: 20px;
+        color: #3d475d;
+      }
+      .join-meeting__enter-code {
+        color: #1a73e8;
+        border-bottom: 1px solid #1a73e8;
+        cursor: pointer;
+      }
+      #main {
+        width: 100%;
+        /* padding-left: 10%; */
+        /* padding-right: 10%; */
+      }
+      .middle-nav-list .nav-links__list-item {
+        font-size: 14px;
+        padding: 5px 12px;
+        border-radius: 3px;
+      }
+      .middle-nav {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 80%;
+        height: 50px;
+        margin-top: 120px;
+        margin-bottom: 120px;
+        /* border-width: 1px; */
+        border-color: #c4c4c4;
+        border-style: solid;
+        border-radius: 30px;
+        box-shadow: 0px 0 5px #f4f4f4, 5px 0 5px #f4f4f4, 0 5px 5px #f4f4f4;
+      }
+      .middle-nav-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        /* position: fixed; */
+        /* top: 50%; */
+      }
+      .nav-links__list-item:hover {
+        cursor: pointer;
+        background-color: #f4f4f4;
+        border-radius: 15px;
+      }
+
+      /* COLLABORATE SECTION */
+      .collaborate-section {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding-left: 10%;
+        padding-right: 10%;
+      }
+      .collaborate-section__image {
+        width: 48%;
+      }
+      .collaborate-section__image img {
+        width: 650px;
+        height: 400px;
+      }
+      .collaborate-section__description {
+        width: 36%;
+      }
+      .gemini-google {
+        color: #1a73e8;
+        text-decoration: underline;
+      }
+      /* DIVERSE OPPORTUNITIES */
+      .diverse-opportunities {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding-left: 10%;
+        padding-right: 10%;
+        padding-top: 200px;
+      }
+      .diverse-opportunities__description {
+        width: 45%;
+      }
+      /* .diverse-opportunities-header{
+            font-size: 40px;
+            font-weight: 500;
+            color:#202124;
+        } */
+      .diverse-opportunities-description {
+        color: gray;
+        font-size: 18px;
+        margin-top: 20px;
+      }
+      .diverse-opportunities__image {
+        width: 48%;
+      }
+      .diverse-opportunities__image img {
+        width: 600px;
+        height: 400px;
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+      /* video-conferencing */
+      .video-conferencing {
+        padding-top: 200px;
+      }
+      .video-conferencing__image {
+        width: 48%;
+      }
+      .video-conferencing__image img {
+        width: 600px;
+      }
+      .optimal-environment {
+        width: 100%;
+        text-align: center;
+        padding-top: 200px;
+      }
+      .optimal-environment__description {
+        color: #202124;
+      }
+      .moment {
+        padding-top: 200px;
+      }
+      .moment__image img {
+        width: 600px;
+      }
+      .moment-header {
+        padding-left: 100px;
+      }
+      .exchange-environment {
+        padding-top: 100px;
+      }
+      .collaborate-section__image {
+        width: 550px;
+      }
+      /* PREMIUM FEATURES */
+      .premium-features {
+        padding-left: 10%;
+        padding-right: 10%;
+      }
+      .premium-features__card-container {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 40px;
+      }
+      .premium-features__card {
+        width: 32%;
+        height: 200px;
+        border: 1px solid gray;
+        border-radius: 15px;
+      }
+      .premium-features-description-container {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        margin-top: 30px;
+      }
+      .premium-features-description-container > div {
+        width: 32%;
+      }
+      .premium-features__card img {
+        width: 100%;
+        border-radius: 15px;
+      }
+      .learn-google-meet {
+        padding-left: 10%;
+        padding-right: 10%;
+        padding-bottom: 100px;
+      }
+      .learn-google-meet__description {
+        display: flex;
+        justify-content: space-between;
+      }
+      .learn-google-meet__left {
+        width: 70%;
+        padding-right: 50px;
+      }
+      .learn-google-meet__left > div > hr {
+        margin-top: 30px;
+      }
+      .learn-google-meet__right {
+        width: 30%;
+        height: 300px;
+        border: 1px solid gray;
+        border-radius: 15px;
+      }
+      .learn-google-meet__right__h3 {
+        padding-top: 40px;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-bottom: 20px;
+        font-size: 20px;
+        font-weight: 500;
+        color: #202124;
+      }
+      .learn-google-meet__right__p3 {
+        padding-left: 20px;
+        padding-right: 20px;
+        color: gray;
+        font-size: 15px;
+        margin-top: 10px;
+        padding-bottom: 20px;
+      }
+      .learn-google-meet__right__btns {
+        padding-left: 20px;
+        padding-bottom: 5px;
+      }
+      .btn-help {
+        background-color: white;
+        color: #1a73e8;
+        height: 45px;
+        width: 60px;
+        font-weight: 600;
+        cursor: pointer;
+        border-radius: 5px;
+        border: 1px solid gray;
+      }
+      .btn-help:hover {
+        background-color: lightgray;
+        border-color: #1a73e8;
+      }
+      .learn-google-meet__right__description {
+        width: 100%;
+      }
+      .h3 {
+        font-size: 20px;
+        font-weight: 500;
+        color: #202124;
+        margin-top: 40px;
+      }
+      .p3 {
+        color: gray;
+        font-size: 15px;
+        margin-top: 10px;
+      }
+      .stay-connected {
+        width: 100%;
+        text-align: center;
+        padding-left: 2%;
+        padding-right: 2%;
+      }
+      .stay-connected__wrapper {
+        background-color: #f8f9fa;
+        padding-top: 100px;
+      }
+      .stay-connected-btns {
+        display: flex;
+        flex-direction: column;
+        /* justify-content: center; */
+        align-items: center;
+        gap: 20px;
+        margin-top: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <nav id="nav-bar" class="nav-bar">
+      <div id="nav-links" class="nav-links">
+        <p>
+          <span class="G">G</span>
+          <span class="o">o</span>
+          <span class="o_">o</span>
+          <span class="g">g</span>
+          <span class="l">l</span>
+          <span class="e">e</span>
+          <span class="w">Workspace</span>
+        </p>
+        <ul class="nav-links__list">
+          <li class="nav-links__list-item">solutions</li>
+          <li class="nav-links__list-item">products</li>
+          <li class="nav-links__list-item">industries</li>
+          <li class="nav-links__list-item">AI</li>
+          <li class="nav-links__list-item">prices</li>
+          <li class="nav-links__list-item">resources</li>
+        </ul>
+      </div>
+      <div id="nav-btns">
+        <button class="btn-test">Test Meet For Business</button>
+        <button class="btn-register">Register</button>
+      </div>
+    </nav>
+    <header id="hero-section">
+      <div class="hero-section">
+        <div id="hero-section__description" class="hero-section__description">
+          <h3 class="google-meet">Google Meet</h3>
+          <h1 class="hero-section__heading">
+            Make video <br />
+            calls with others anytime, anywhere
+          </h1>
+          <p class="section-description">
+            No matter where you are, you can stay connected and collaborate with
+            friends, family and colleagues.
+          </p>
+          <div class="header-btn-container">
+            <button class="btn-register">Register</button>
+            <button class="btn-test">Test Meet For Business</button>
+          </div>
+          <div class="join-meeting">
+            <p class="join-meeting__text">Join a meeting now</p>
+            <p class="join-meeting__enter-code">Enter the code</p>
+          </div>
+        </div>
+        <div id="hero-section__image" class="hero-section__image">
+          <img
+            class="hero-section-img"
+            src="https://lh3.googleusercontent.com/37quIKq6jnL-6eXLEuCWygEWF2kZT5AufL6YLneambiiJUO1bRtdXtBzFX6dlysWVWAjQ4-NCDqEgyz-PeeADUahiFpdW8HoXbAW=e365-pa-nu-rw-w1416"
+            alt=""
+          />
+        </div>
+      </div>
+      <div class="middle-nav-container">
+        <nav id="middle-nav" class="middle-nav">
+          <ul class="middle-nav-list">
+            <li class="nav-links__list-item">Gemini in Google Meet</li>
+            <li class="nav-links__list-item">communication</li>
+            <li class="nav-links__list-item">optimization</li>
+            <li class="nav-links__list-item">Cooperation</li>
+            <li class="nav-links__list-item">Security</li>
+            <li class="nav-links__list-item">premium features</li>
+            <li class="nav-links__list-item">FAQ</li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main id="main">
+      <section id="collaborate-section" class="collaborate-section">
+        <div id="collaborate-section__image" class="collaborate-section__image">
+          <img
+            src="https://lh3.googleusercontent.com/d8nX9MocCqM3TS5lS9x-iwHJU4L0S8YnXPtrIj8lBknl6SmJvYTdLC863-UjTxCld4ROAE8hO8koboY7VJBSviL6lIx-JZTd1MZGtg=e365-pa-nu-rw-w1472"
+            alt=""
+          />
+        </div>
+        <div
+          id="collaborate-section__description"
+          class="collaborate-section__description"
+        >
+          <h2 class="section-header">
+            Collaborate even better in meetings – with Gemini
+          </h2>
+          <p class="section-description">
+            Studio look, studio sound and studio lighting offer you the ideal
+            conditions to appear even more professional during a video
+            conference. Thanks to translated subtitles, you can communicate with
+            each other in over 65 different languages. With the "Take notes for
+            me" function, you can record details from the meeting. Use these and
+            other functions based on generative AI with
+            <a
+              href="https://workspace.google.com/intl/de/solutions/ai/"
+              class="gemini-google"
+              >Gemini for Google Workspace.</a
+            >
+          </p>
+        </div>
+      </section>
+      <section id="diverse-opportunities" class="diverse-opportunities">
+        <div
+          id="diverse-opportunities__description"
+          class="diverse-opportunities__description"
+        >
+          <h2 class="diverse-opportunities-header section-header">
+            Diverse opportunities <br />for exchange and communication
+          </h2>
+          <p class="section-description">
+            Whether planned or spontaneous, as a real-time video conference or
+            by exchanging video messages, Google Meet lets you stay connected in
+            the way that works best for you.
+          </p>
+        </div>
+        <div
+          id="diverse-opportunities__image"
+          class="diverse-opportunities__image"
+        >
+          <img
+            src="https://lh3.googleusercontent.com/seSrO_XnHujbOm4aaVAPXMgxLgVEP-Af3dRFon76GS0991en7_Lk_eRFRyCXZMSeIC75nEv6tcHeUu70HM-8aHws5R18uRDLsrg=e365-pa-nu-rw-w1508"
+            alt=""
+          />
+        </div>
+      </section>
+      <section
+        id="video-conferencing"
+        class="video-conferencing collaborate-section"
+      >
+        <div
+          id="video-conferencing__image"
+          class="video-conferencing__image collaborate-section__image"
+        >
+          <img
+            src="https://lh3.googleusercontent.com/B5X3pv2eCZF61k1b0s6hTuZarp5Z1-HJmxH4XSTMWbtkwWUYIM3DA6kihPcUM4y0rUupj1KOYn3AQU6Sl6tKlyKItMIYnP6-b9i3=e365-pa-nu-rw-w1508"
+            alt=""
+          />
+        </div>
+        <div
+          id="diverse-opportunities__description"
+          class="diverse-opportunities__description video-conferencing__description"
+        >
+          <h2 class="section-header">
+            video conferencing <br />
+            for any device
+          </h2>
+          <p class="section-description">
+            You can participate in video conferences via your smartphone or
+            tablet. The Google Meet app is available <br />
+            in
+            <a href="https://apps.apple.com/us/app/google-meet/id1096918571"
+              >App Store</a
+            >
+            and
+            <a
+              href="https://play.google.com/store/apps/details?id=com.google.android.apps.tachyon"
+              >Play Store</a
+            >You can even use Google <br />
+            Meet via your computer's browser without installing any software.
+          </p>
+        </div>
+      </section>
+      <section id="optimal-environment" class="optimal-environment">
+        <h2 class="section-header">
+          An optimal environment <br />
+          for your discussions
+        </h2>
+        <p class="section-description">
+          Google Meet offers you perfect conditions so that you can concentrate
+          on <br />
+          what matters most: communication.
+        </p>
+      </section>
+      <section id="achieve" class="achieve optimal-environment">
+        <h2 class="section-header">Achieve more together</h2>
+        <p class="section-description">
+          Google Meet is integrated with other Google Workspace tools to help
+          you <br />
+          collaborate even more seamlessly.
+        </p>
+      </section>
+      <section id="moment" class="moment collaborate-section">
+        <div
+          id="moment__image"
+          class="moment__image collaborate-section__image"
+        >
+          <img
+            src="https://lh3.googleusercontent.com/NW88ZjmAB9XxcybtlLr1Cn_7JEohln2u4rwSZaJchZfHOjt9i-uFLDzSq94ULRNYLhSB1h9js6bb87A2tzpIvhwf9aqhFrazK_jX9Q=e365-pa-nu-rw-w1508"
+            alt=""
+          />
+        </div>
+        <div
+          id="moment-header"
+          class="moment-header video-conferencing__description"
+        >
+          <h2 class="section-header">Enjoy the moment</h2>
+          <p class="section-description">
+            The Live Share feature makes video calls in Meet even more lively.
+            For example, you can watch YouTube videos together, listen to music
+            together, or play games. 2 . There are also interactive features,
+            such as effects or emoji reactions.
+          </p>
+        </div>
+      </section>
+      <section
+        id="exchange-environment"
+        class="exchange-environment collaborate-section"
+      >
+        <div
+          id="collaborate-section__description"
+          class="exchange-environment collaborate-section__description"
+        >
+          <h2 class="section-header">
+            Exchange in <br />
+            a protected environment
+          </h2>
+          <p class="section-description">
+            Your data will be
+            <a
+              href="https://support.google.com/a/answer/7582940?hl=de#zippy=,encryption"
+              >encrypted</a
+            >
+            In addition, extensive security layers are available, such as
+            advanced encryption, anti-abuse measures and
+            <a href="https://support.google.com/a/answer/7582940?hl=de"
+              >privacy settings</a
+            >
+            Your data is therefore fully protected.
+          </p>
+        </div>
+        <div id="collaborate-section__image" class="collaborate-section__image">
+          <img
+            src="https://lh3.googleusercontent.com/_F6Wg38pP4RoYQnYcsD3qYsj1wFdJtbfzQXrd7ICFMueiDk-xJAvBj0xYA-W0AIPwJJat_krQNq_7fjNnAQfWoXF8jeAFbgwPSE=e365-pa-nu-rw-w1509"
+            alt=""
+          />
+        </div>
+      </section>
+      <section
+        id="premium-features"
+        class="premium-features optimal-environment"
+      >
+        <h2 class="section-header">
+          Even more options <br />
+          with premium features
+        </h2>
+        <p class="section-description">
+          With a subscription of
+          <a href="https://workspace.google.com/intl/de/pricing.html"
+            >Google Workspace</a
+          >
+          or
+          <a href="https://one.google.com/about/plans?hl=de"
+            >Google One Premium</a
+          >
+          you have <br />
+          access to premium features.
+        </p>
+        <div class="premium-features__card-container">
+          <div class="premium-features__card">
+            <img
+              src="https://lh3.googleusercontent.com/BJ0JNvw-r_UT-39bGNQHLpYqPBxKjqUAwJN4poO3oYkVTca7pfe0sra3nlf4Nju-FqroWIRpCe2LBqnyfi3Li896anY76nS4VRY=e365-pa-nu-rw-w739"
+              alt=""
+            />
+          </div>
+          <div class="premium-features__card">
+            <img
+              src="https://lh3.googleusercontent.com/09SriLckRmyMHU_qwTr6BMdwCKl0UKKFHXVVPfMTuPDmrNUDvlvJpCeRlwjvsb4XeA3t_h1P1NM2S_AgvS58DHM1wnwaC5fZj9lQ=e365-pa-nu-rw-w739"
+              alt=""
+            />
+          </div>
+          <div class="premium-features__card">
+            <img
+              src="https://lh3.googleusercontent.com/B7wEscQpw4tmFY7Uzsz3B8-9vKeZDfkojkponZUJrul_52NZlE2ZKwQtLX_yOK6-Oq95m7Sope0Li97QWt7lq_6LpIZWmC2HBt35vQ=e365-pa-nu-rw-w739"
+              alt=""
+            />
+          </div>
+        </div>
+        <div class="premium-features-description-container">
+          <div>
+            <div class="">
+              <img src="./verify-badge.svg" alt="" />
+              <span>premium features</span>
+            </div>
+            <h3>Hold longer video conferences</h3>
+            <p>You can hold group calls for up to 24 hours.</p>
+          </div>
+          <div>
+            <div class="">
+              <img src="./verify-badge.svg" alt="" />
+              <span>premium features</span>
+            </div>
+            <h3>make records</h3>
+            <p>You can easily record or transcribe video conferences.</p>
+          </div>
+          <div>
+            <div class="">
+              <img src="./verify-badge.svg" alt="" />
+              <span>premium features</span>
+            </div>
+            <h3>
+              video conferences <br />
+              with more participants
+            </h3>
+            <p>You can add up to 1,000 participants.</p>
+          </div>
+        </div>
+      </section>
+      <section class="learn-google-meet">
+        <div
+          id="learn-google-meet__header"
+          class="learn-google-meet__header optimal-environment"
+        >
+          <h2 class="section-header">
+            Want to learn more <br />
+            about Google Meet?
+          </h2>
+          <p class="section-description">
+            Visit our FAQs. <br />
+            <a href="">Expand all</a>
+          </p>
+          >
+        </div>
+        <div
+          id="learn-google-meet__description"
+          class="learn-google-meet__description"
+        >
+          <div class="learn-google-meet__left">
+            <div>
+              <h3 class="h3">
+                Can external users participate in a video call?
+              </h3>
+              <p class="p3">
+                Yes. With the free version of Google Meet, all participants must
+                sign in with a Google account or request to join the meeting
+                from the person who organized the video conference. Google
+                Workspace customers can also invite participants without a
+                Google account to video meetings. Simply share the link or
+                meeting ID with everyone invited.
+              </p>
+              <hr />
+            </div>
+            <div>
+              <h3 class="h3">How much does Google Meet cost?</h3>
+              <p class="p3">
+                Anyone with a Google account can create a video conference with
+                up to 100 participants for free. The maximum duration per
+                conference is 60 minutes. There is no time limit for mobile
+                conferences and 1:1 calls. If you want to hold longer meetings
+                with a larger number of participants and use additional features
+                such as international dial-in numbers, video conference
+                recording, live streaming and management functions, you can find
+                more information on theSubscriptions and prices for
+                organizationsas well as underGoogle Workspace Individual.
+              </p>
+              <hr />
+            </div>
+            <div>
+              <h3 class="h3">How do I get access to premium features?</h3>
+              <p class="p3">
+                Premium features are available via a subscription ofGoogle
+                WorkspaceorGoogle One Premiumavailable.
+              </p>
+              <hr />
+            </div>
+            <div>
+              <h3 class="h3">Are video conferences secure?</h3>
+              <p class="p3">
+                Yes. Video and audio streams in Meet are encrypted. Users, even
+                at other locations, can participate securely.
+              </p>
+              <hr />
+            </div>
+            <div>
+              <h3 class="h3">
+                Does dial-in access require the services of a third party
+                provider?
+              </h3>
+              <p class="p3">
+                No.Google Workspace Enterprise-Users can add a phone number and
+                PIN to each conference without any further
+                configuration.Information on using dial-in numbers
+              </p>
+              <hr />
+            </div>
+            <div>
+              <h3 class="h3">
+                What is the best video conferencing hardware for Google Meet?
+              </h3>
+              <p class="p3">
+                You can use Google Meet with various systems from leading
+                hardware manufacturers tovideo conferencesin excellent quality.
+                Ourcomprehensive portfoliocontains Google Meet-certified
+                hardware from both Google and third-party companies. You'll find
+                devices for every type of room and use case, as well as products
+                in different price ranges. In addition, thanks to theintegrated
+                interoperabilitywith Google Meet hardware, you can also
+                participate in video conferences via Cisco Webex or Zoom.
+              </p>
+              <hr />
+            </div>
+          </div>
+          <div class="learn-google-meet__right">
+            <h3 class="learn-google-meet__right__h3">
+              Do you need further support?
+            </h3>
+            <p class="learn-google-meet__right__p3">
+              Here you will find tips and detailed instructions. There is
+              something for everyone - from users with no previous knowledge to
+              power users.
+            </p>
+            <div class="learn-google-meet__right__btns">
+              <button class="btn-help">Help</button>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="stay-connected" class="stay-connected">
+        <div id="stay-connected__wrapper" class="stay-connected__wrapper">
+          <img src="./google-meet.svg" alt="" />
+          <h2 class="section-header">Stay connected with Google Meet</h2>
+          <div class="stay-connected-btns">
+            <button class="btn-reg">Register</button>
+            <button class="btn-test">Test Meet For Business</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
